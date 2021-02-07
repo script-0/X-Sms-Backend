@@ -27,7 +27,8 @@ Les routes ont été implémentées dans une logique d'authentification par sess
 Les différentes routes et leur format sont:
 
 ### A-Routes de gestion des utilisateurs
-1. `/api/user/create` : `POST` creation des utilisateurs. Attend un JSON :
+1. `/api/user/create`
+  - `POST` creation des utilisateurs. Attend un JSON :
 ``` 
   {
     name: required,
@@ -39,9 +40,12 @@ Les différentes routes et leur format sont:
   }
 ```
 
-2. `/api/users` : `GET` pour lister  tous les users (route de test (Elle sera supprimée)), `POST` pour enregistrer un User).
+2. `/api/users`
+  - `GET` pour lister  tous les users (route de test (Elle sera supprimée))
+  - `POST` pour enregistrer un User).
 
-3. `/api/login` : `POST` uniquement (login et authentifie l'utilisateur). Le body doit contenir : `login` et `password`
+3. `/api/login`
+  - `POST` uniquement (login et authentifie l'utilisateur). Le body doit contenir : `login` et `password`
 ```
   {
     login: required, 
@@ -49,11 +53,15 @@ Les différentes routes et leur format sont:
   }
 ```
 
-4. `/api/user` : `GET` pour récupérer les infos de l'user authentifié, `PUT` pour modifier ses infos. Dans le cas du `PUT`, le format de JSON est attendu est celui de la creation d'un utilisateur, pour les champs non fournis, leurs valeurs précédantes seront utilisés.
+4. `/api/user`
+  - `GET` pour récupérer les infos de l'user authentifié
+  - `PUT` pour modifier ses informations ; le format de JSON est attendu est celui de la creation d'un utilisateur, pour les champs non fournis, leurs valeurs précédantes seront utilisés.
 
 ### B-Routes de gestion des contacts
-1. `/api/user/contacts` : `GET` pour recuperer les contacts de l'utilisateur de la session en cours.
-2. `/api/user/contact/create` : `POST` pour ajouter un contact à l'utilisateur de la session en cours. un JSON est attendu :
+1. `/api/user/contacts`
+- `GET` pour recuperer les contacts de l'utilisateur de la session en cours.
+2. `/api/user/contact/create`
+- `POST` pour ajouter un contact à l'utilisateur de la session en cours. un JSON est attendu :
 ```
   {
     name: required,
@@ -80,7 +88,8 @@ Les différentes routes et leur format sont:
   }
 ```
 
-2. `/api/user/sms/<SMSId>` : `GET` pour récupérer les infos d'un SMS (pas de Modification , ni de suppression)
+2. `/api/user/sms/<SMSId>`
+- `GET` pour récupérer les infos d'un SMS (pas de Modification , ni de suppression)
 
 ### D-Routes de gestion des Groupes
 1. `/api/user/groups/:GroupId`
@@ -91,15 +100,19 @@ Les différentes routes et leur format sont:
     }
   - `DELETE` pour supprimer un groupe
 
-2. `/api/user/groups/:GroupId/contacts` : `GET` pour recuperer la liste des contacts d'un groupe. 
+2. `/api/user/groups/:GroupId/contacts`
+- `GET` pour recuperer la liste des contacts d'un groupe. 
 
 3. `/api/user/groups/:GroupId/contacts/:ContactId`
   - `PUT` : ajouter un contact à un groupe
   - `DELETE` : retirer un contact d'un groupe
 
 ### E-Quelques Routes de test
-1. `/api/user/token/generate/:text` : `GET` générer et renvoyer le token correspondant à  `:text`
+1. `/api/user/token/generate/:text`
+- `GET` générer et renvoyer le token correspondant à  `:text`
 
-2. `/api/user/decode/:code` : `GET` verify le token `:code` et le decode
+2. `/api/user/decode/:code`
+- `GET` verify le token `:code` et le decode
 
-3. `/api/user/sendEmail/:address/:link` : `GET` pour envoyer un e-amil à `:address` contenant un le lien `:link`
+3. `/api/user/sendEmail/:address/:link` 
+- `GET` pour envoyer un e-amil à `:address` contenant un le lien `:link`
