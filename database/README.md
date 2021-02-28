@@ -78,9 +78,9 @@ Les caractéristiques de la base de donnée sont:
       </li>
       <li>Platform :
           <ul>
-              <li> id , <li>
+              <li> id , </li>
               <li> name,   </li>
-              </li> token </li>
+              <li> token </li>
           </ul>
     </ul>
   </li>
