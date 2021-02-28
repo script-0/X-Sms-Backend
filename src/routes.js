@@ -2,6 +2,7 @@
 
 module.exports = function (app) {
   var user_controller = require("./controllers/user.js");
+  var platform_controller = require("./controllers/platform.js");
   var contact_controller = require("./controllers/contact.js")
   var sms_controller = require("./controllers/sms.js")
   var group_controller = require("./controllers/group.js")
@@ -11,6 +12,19 @@ module.exports = function (app) {
   var cors = require('cors')
 
   app.use(cors())
+
+  //Platform routes
+    /*
+      body: {
+        name: required, 
+        token: required,
+      }
+      return "Platform Loged in"
+    */
+  app.route("/api/loginPlatform")
+    .post(platform_controller.login)
+    
+
 
   // User routes
    app.route('/api/user/create')
@@ -28,7 +42,7 @@ module.exports = function (app) {
    */
  
   app.route('/api/users')
-    .get(user_controller.authentificate,user_controller.list_all)
+    .get(platform_controller.authentificate,user_controller.list_all)
   
   app.route("/api/login")
     .post(user_controller.login)

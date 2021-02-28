@@ -71,6 +71,15 @@ CREATE TABLE Sendings (
   CONSTRAINT FK_SendingGroup FOREIGN KEY (dgroup) REFERENCES DGroup(id)
 ) ENGINE=INNODB;
 
+CREATE TABLE Platform(
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(10),
+  token VARCHAR(5)
+) ENGINE=INNODB;
+
+INSERT INTO Platform (name,token) VALUES ('test','test');
+
+
 /* Création de l'utilisateur node pour cette bd */
 DROP User smsplatform IF EXISTS;
 CREATE USER smsplatform IDENTIFIED WITH mysql_native_password BY 'smsplatform';
