@@ -20,34 +20,41 @@ exports.create_platform = function (req, res) {
   console.log(req.body)
   var new_platform = new PlatformModel(req.body)
 
-  PlatformModel.create(platform, function (err, platform) {
+  PlatformModel.create(new_platform, function (err, platform) {
     if (err) {
       res.send(err);
+    }else{
+        console.log("Platform Created")
+        res.json(platform);
     }
-    console.log("Platform Created")
-    res.json(platform);
   });
 }
 
 exports.get_platform = function (req, res) {
     var platform = new PlatformModel(req.body)
-    PlatformModel.get_id(platform, function (err, id) {
+    PlatformModel.get_id(platform, function (err, ids) {
         if (err) {
         res.send(err)
         }
-        platform.id = id
+        platform.id = ids.id
         res.json(platform)
     })
 }
 
 exports.update_platform = function (req, res) {
   console.log(req.body)
-  var updated_user = new PlatformModel(req.body)
-  UserModel.update(updated_user, function (err, user) {
+  var updated_platform = new PlatformModel(req.body)
+  PlatformModel.update(updated_platform, function (err, user) {
     if (err) {
       res.send(err);
+    }else if(user.affectedRows == 1){
+        res.json(updated_platform)
     }
-    res.json(user);
+    else{
+        // Cas de duplication dans la B.D.
+        // ou pas de modification de la B.D. (pas d'id fourni)
+        res.json('malformed Request');
+    }
   });
 }
 
@@ -55,12 +62,13 @@ exports.login = function (req, res) {
   console.log(req.body)
 
   PlatformModel.find(req.body.name, req.body.token, function (err, platform) {
-    if (err) {
+    if (err){
       res.send(err);
+    }else{
+        var token = XToken.sign(platform.id)
+        req.session.platform_token = token
+        res.send(JSON.stringify({value:"Platform Loged in"}));
     }
-    var token = XToken.sign(platform.id)
-    req.session.platform_token = token
-    res.send(JSON.stringify({value:"Platform Loged in"}));
   })
 }
 

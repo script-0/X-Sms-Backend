@@ -17,10 +17,8 @@ Platform.create = function(platform, result){
       }
       else {
         console.log("Platform created: ", res.insertId);
-        const sortie = {
-          "platformId": res.insertId,
-        }
-        result(null, sortie);
+        platform.id = res.insertId,
+        result(null, platform);
       }
     });
 };
@@ -47,7 +45,7 @@ Platform.get_id = function(platform, result) {
       }
       else {
         console.log("Platform "+ platform.name + " id =  ", res);
-        result(null, res);
+        result(null, res[0]);
       }
     });
 };
@@ -97,6 +95,9 @@ Platform.find = function (name, token, result) {
     if (err) {
       console.error("Error: ", err);
       result(err, null);
+    }else if (res.length ==0 ){
+        console.log("Platform with name ="+name+"not found")
+        result("Platform { name : "+name+" } not found",null)
     }
     else {
       console.log("Platform with name=" + name + " and token=" + token + " found!");

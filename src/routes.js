@@ -23,8 +23,20 @@ module.exports = function (app) {
     */
   app.route("/api/loginPlatform")
     .post(platform_controller.login)
-    
+  
+  /*   To delete */
+  app.route("/api/platforms")
+    .get(platform_controller.list_all)
 
+  
+  app.route("/api/platform")
+    .post(platform_controller.create_platform)
+
+  app.route("/api/platform")
+    .put(platform_controller.authentificate, platform_controller.update_platform)
+
+  app.route("/api/platform/")
+    .get(platform_controller.authentificate, platform_controller.get_platform)
 
   // User routes
    app.route('/api/user/create')
