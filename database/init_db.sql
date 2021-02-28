@@ -72,7 +72,7 @@ CREATE TABLE Sendings (
 ) ENGINE=INNODB;
 
 /* Création de l'utilisateur node pour cette bd */
-DROP User smsplatform;
+DROP User smsplatform IF EXISTS;
 CREATE USER smsplatform IDENTIFIED WITH mysql_native_password BY 'smsplatform';
 GRANT ALL PRIVILEGES ON SMSDatabase.* TO smsplatform;
 FLUSH PRIVILEGES;
